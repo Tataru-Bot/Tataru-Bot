@@ -15,7 +15,7 @@ use serenity::{
     model::{event::ResumedEvent, gateway::Ready},
     prelude::*,
 };
-use kankyo;
+
 use tracing::{error, info, Level};
 
 use commands::{
