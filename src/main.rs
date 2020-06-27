@@ -40,19 +40,17 @@ impl EventHandler for Handler {
 }
 
 #[group]
-#[commands(ping)]
+#[commands(ping, weeaboo)]
 struct General;
 
 fn main() {
     // a builder for `FmtSubscriber`.
-    let subscriber = tracing_subscriber::fmt()
+    let _subscriber = tracing_subscriber::fmt()
         // all spans/events with a level higher than TRACE (e.g, debug, info, warn, etc.)
         // will be written to stdout.
         .with_max_level(Level::INFO)
         // completes the builder and sets the constructed `Subscriber` as the default.
         .init();
-
-    
 
     let token = env::var("DISCORD_TOKEN")
         .expect("Expected a token in the environment");
