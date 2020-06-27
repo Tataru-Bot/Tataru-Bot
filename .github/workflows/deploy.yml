@@ -9,6 +9,8 @@ env:
   PROJECT_ID: ${{ secrets.RUN_PROJECT }}
   RUN_REGION: europe-west1
   SERVICE_NAME: tataru-bot
+  GCE_INSTANCE: instance-1
+  GCE_INSTANCE_ZONE: europe-west2-a
 
 jobs:
   setup-build-deploy:
@@ -33,12 +35,10 @@ jobs:
           --quiet \
           --timeout=30m \
           --tag "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"
-    # Deploy image to Cloud Run
+
+    # Deploy image to Google Cloud Compute
     - name: Deploy
       run: |-
-        gcloud run deploy "$SERVICE_NAME" \
-          --quiet \
-          --region "$RUN_REGION" \
-          --image "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA" \
-          --platform "managed" \
-          --allow-unauthenticated
+        gcloud compute instances update-container "$GCE_INSTANCE" \
+          --zone "$GCE_INSTANCE_ZONE" \
+          --container-image "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"

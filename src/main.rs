@@ -44,10 +44,6 @@ impl EventHandler for Handler {
 struct General;
 
 fn main() {
-    // This will load the environment variables located at `./.env`, relative to
-    // the CWD. See `./.env.example` for an example on how to structure this.
-    kankyo::init().expect("Failed to load .env file");
-
     // a builder for `FmtSubscriber`.
     let subscriber = tracing_subscriber::fmt()
         // all spans/events with a level higher than TRACE (e.g, debug, info, warn, etc.)
