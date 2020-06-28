@@ -19,7 +19,8 @@ use serenity::{
 use tracing::{error, info, Level};
 
 use commands::{
-    meta::*
+    meta::*,
+    owner::*,
 };
 struct ShardManagerContainer;
 
@@ -40,7 +41,7 @@ impl EventHandler for Handler {
 }
 
 #[group]
-#[commands(ping, weeaboo)]
+#[commands(ping, weeaboo, listen)]
 struct General;
 
 fn main() {
